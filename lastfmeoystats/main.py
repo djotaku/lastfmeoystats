@@ -61,12 +61,11 @@ def write_data_to_file(data, file_name: str):
         file.writelines(output)
 
 
-def create_bar_chart(group_names: list, group_data: list, x_label: str = "", y_label: str = "", title: str = "",
+def create_bar_chart(last_fm_data, x_label: str = "", y_label: str = "", title: str = "",
                      graph_path: str = "", graph_filename: str = ""):
     """Create matplotlib bar graph.
 
-    :param group_names: A list with the names for bars
-    :param group_data: A list with the data that pairs with the names.
+    :param last_fm_data: last.fm iterable data
     :param x_label: The label for the x-axis on the graph.
     :param y_label: The label for the y-axis on the graph.
     :param title: The Title for the graph.
@@ -75,8 +74,10 @@ def create_bar_chart(group_names: list, group_data: list, x_label: str = "", y_l
     """
     plt.style.use('fivethirtyeight')
     plt.rcParams.update({'figure.autolayout': True})
-    fig, ax = plt.subplots(figsize=(8, 8))
-    ax.bar(group_names, group_data)
+    fig, ax = plt.subplots(figsize=(20, 20))
+    names = [f'{last_fm_thing.item}' for last_fm_thing in last_fm_data]
+    listens = [int(last_fm_thing.weight) for last_fm_thing in last_fm_data]
+    ax.bar(names, listens)
     x_labels = ax.get_xticklabels()
     plt.setp(x_labels, rotation=30, horizontalalignment='right')
     ax.set(xlabel=x_label, ylabel=y_label, title=title)
@@ -92,6 +93,7 @@ if __name__ == '__main__':
     print(top_annual_tracks)
     write_data_to_file(top_annual_artists, "top_annual_artists")
     write_data_to_file(top_overall_artists, "top_overall_artists")
+    create_bar_chart(top_annual_artists, 'Artists', 'Listens', 'Top Artists of 2020', '.', 'top_annual_artist.jpg')
     write_data_to_file(top_annual_albums, "top_annual_albums")
     write_data_to_file(top_overall_albums, "top_overall_albums")
     write_data_to_file(top_annual_tracks, "top_annual_tracks")
