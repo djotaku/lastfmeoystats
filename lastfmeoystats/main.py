@@ -45,7 +45,7 @@ def get_all_time_data(user):
         :param user: A pylast user object
         :returns: A tuple with the top artists, albums, and tracks for the entire user history.
         """
-    return user.get_top_artists(period='overall'), user.get_top_albums(period='overall'), \
+    return user.get_top_artists(period='overall', limit=100), user.get_top_albums(period='overall'), \
            user.get_top_tracks(period='overall')
 
 
@@ -74,12 +74,12 @@ def create_bar_chart(last_fm_data, x_label: str = "", y_label: str = "", title: 
     """
     plt.style.use('fivethirtyeight')
     plt.rcParams.update({'figure.autolayout': True})
-    fig, ax = plt.subplots(figsize=(20, 20))
+    fig, ax = plt.subplots(figsize=(25, 25))
     names = [f'{last_fm_thing.item}' for last_fm_thing in last_fm_data]
     listens = [int(last_fm_thing.weight) for last_fm_thing in last_fm_data]
     ax.bar(names, listens)
     x_labels = ax.get_xticklabels()
-    plt.setp(x_labels, rotation=30, horizontalalignment='right')
+    plt.setp(x_labels, rotation=50, horizontalalignment='right')
     ax.set(xlabel=x_label, ylabel=y_label, title=title)
     ax.title.set(y=1.05)
     fig.savefig(f"{graph_path}/{graph_filename}", transparent=False, dpi=80, bbox_inches="tight")
@@ -92,9 +92,14 @@ if __name__ == '__main__':
     top_overall_artists, top_overall_albums, top_overall_tracks = get_all_time_data(my_user)
     print(top_annual_tracks)
     write_data_to_file(top_annual_artists, "top_annual_artists")
-    write_data_to_file(top_overall_artists, "top_overall_artists")
     create_bar_chart(top_annual_artists, 'Artists', 'Listens', 'Top Artists of 2020', '.', 'top_annual_artist.jpg')
+    write_data_to_file(top_overall_artists, "top_overall_artists")
+    create_bar_chart(top_overall_artists, 'Artists', 'Listens', 'Top Artists Overall', '.', 'top_overall_artist.jpg')
     write_data_to_file(top_annual_albums, "top_annual_albums")
+    create_bar_chart(top_annual_albums, 'Albums', 'Listens', 'Top Albums of 2020', '.', 'top_annual_albums.jpg')
     write_data_to_file(top_overall_albums, "top_overall_albums")
+    create_bar_chart(top_overall_albums, 'Albums', 'Listens', 'Top Albums Overall', '.', 'top_overall_albums.jpg')
     write_data_to_file(top_annual_tracks, "top_annual_tracks")
+    create_bar_chart(top_annual_tracks, 'Tracks', 'Listens', 'Top Tracks of 2020', '.', 'top_annual_tracks.jpg')
     write_data_to_file(top_overall_tracks, "top_overall_tracks")
+    create_bar_chart(top_overall_tracks, 'Tracks', 'Listens', 'Top Tracks Overall', '.', 'top_overall_tracks.jpg')
