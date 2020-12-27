@@ -1,0 +1,2 @@
+setuptools~=51.1.0
+pylast~=4.0.0
