@@ -35,8 +35,8 @@ def get_annual_data(user):
     :param user: A pylast user object
     :returns: A tuple with the top artists, albums, and tracks of the last 12 months.
     """
-    return user.get_top_artists(period='12month'), user.get_top_albums(period='12month'),\
-           user.get_top_tracks(period='12month')
+    return user.get_top_artists(period='12month', limit=20), user.get_top_albums(period='12month', limit=20),\
+           user.get_top_tracks(period='12month', limit=20)
 
 
 def get_all_time_data(user):
@@ -45,8 +45,8 @@ def get_all_time_data(user):
         :param user: A pylast user object
         :returns: A tuple with the top artists, albums, and tracks for the entire user history.
         """
-    return user.get_top_artists(period='overall', limit=100), user.get_top_albums(period='overall'), \
-           user.get_top_tracks(period='overall')
+    return user.get_top_artists(period='overall', limit=100), user.get_top_albums(period='overall', limit=15), \
+           user.get_top_tracks(period='overall', limit=15)
 
 
 def write_data_to_file(data, file_name: str):
