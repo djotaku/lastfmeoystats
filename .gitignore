@@ -13,3 +13,4 @@ lastfmeoystats/top_overall_albums.jpg
 lastfmeoystats/top_overall_artist.jpg
 lastfmeoystats/top_overall_tracks.jpg
 venv/
+__pycache__
