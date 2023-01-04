@@ -9,8 +9,7 @@ import pylast
 def get_secrets():
     try:
         with open('secrets.json', 'r') as file:
-            secrets = json.load(file)
-            return secrets
+            return json.load(file)
     except FileNotFoundError:
         print("Could not find secrets.json!")
         raise
@@ -26,8 +25,7 @@ def interpret_secrets(secrets: dict):
     api_secret = secrets['secret']
     user = secrets['user']
     network = pylast.LastFMNetwork(api_key=api_key, api_secret=api_secret)
-    user = network.get_user(user)
-    return user
+    return network.get_user(user)
 
 
 def get_annual_data(user):
@@ -36,8 +34,8 @@ def get_annual_data(user):
     :param user: A pylast user object
     :returns: A tuple with the top artists, albums, and tracks of the last 12 months.
     """
-    return user.get_top_artists(period='12month', limit=20), user.get_top_albums(period='12month', limit=20),\
-           user.get_top_tracks(period='12month', limit=20)
+    return user.get_top_artists(period='12month', limit=20), user.get_top_albums(period='12month', limit=20), \
+        user.get_top_tracks(period='12month', limit=20)
 
 
 def get_all_time_data(user):
@@ -47,7 +45,7 @@ def get_all_time_data(user):
         :returns: A tuple with the top artists, albums, and tracks for the entire user history.
         """
     return user.get_top_artists(period='overall', limit=100), user.get_top_albums(period='overall', limit=15), \
-           user.get_top_tracks(period='overall', limit=15)
+        user.get_top_tracks(period='overall', limit=15)
 
 
 def write_data_to_file(data, file_name: str):
