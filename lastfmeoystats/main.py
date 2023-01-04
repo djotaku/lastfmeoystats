@@ -1,5 +1,6 @@
 """ Create lists and graphs for end of the year last.fm stats."""
 
+from datetime import datetime
 import json
 import matplotlib.pyplot as plt  # type: ignore
 import pylast
@@ -90,16 +91,20 @@ if __name__ == '__main__':
     my_user = interpret_secrets(my_secrets)
     top_annual_artists, top_annual_albums, top_annual_tracks = get_annual_data(my_user)
     top_overall_artists, top_overall_albums, top_overall_tracks = get_all_time_data(my_user)
-    print(top_annual_tracks)
+    current_year = datetime.now().year
     write_data_to_file(top_annual_artists, "top_annual_artists")
-    create_bar_chart(top_annual_artists, 'Artists', 'Listens', 'Top Artists of 2020', '.', 'top_annual_artist.jpg')
+    create_bar_chart(top_annual_artists, 'Artists', 'Listens', f'Top Artists of {current_year}', '.',
+                     'top_annual_artist.jpg')
     write_data_to_file(top_overall_artists, "top_overall_artists")
-    create_bar_chart(top_overall_artists, 'Artists', 'Listens', 'Top Artists Overall', '.', 'top_overall_artist.jpg')
+    create_bar_chart(top_overall_artists, 'Artists', 'Listens', 'Top Artists Overall', '.',
+                     'top_overall_artist.jpg')
     write_data_to_file(top_annual_albums, "top_annual_albums")
-    create_bar_chart(top_annual_albums, 'Albums', 'Listens', 'Top Albums of 2020', '.', 'top_annual_albums.jpg')
+    create_bar_chart(top_annual_albums, 'Albums', 'Listens', f'Top Albums of {current_year}', '.',
+                     'top_annual_albums.jpg')
     write_data_to_file(top_overall_albums, "top_overall_albums")
     create_bar_chart(top_overall_albums, 'Albums', 'Listens', 'Top Albums Overall', '.', 'top_overall_albums.jpg')
     write_data_to_file(top_annual_tracks, "top_annual_tracks")
-    create_bar_chart(top_annual_tracks, 'Tracks', 'Listens', 'Top Tracks of 2020', '.', 'top_annual_tracks.jpg')
+    create_bar_chart(top_annual_tracks, 'Tracks', 'Listens', f'Top Tracks of {current_year}', '.',
+                     'top_annual_tracks.jpg')
     write_data_to_file(top_overall_tracks, "top_overall_tracks")
     create_bar_chart(top_overall_tracks, 'Tracks', 'Listens', 'Top Tracks Overall', '.', 'top_overall_tracks.jpg')
