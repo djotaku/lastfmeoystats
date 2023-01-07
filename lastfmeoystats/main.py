@@ -28,7 +28,7 @@ def interpret_secrets(secrets: dict):
     return network.get_user(user)
 
 
-def get_annual_data(user):
+def get_annual_data(user) -> tuple:
     """Get annual data from last.fm.
 
     :param user: A pylast user object
@@ -38,14 +38,14 @@ def get_annual_data(user):
         user.get_top_tracks(period='12month', limit=20)
 
 
-def get_all_time_data(user):
+def get_all_time_data(user) -> tuple:
     """Get overall data from last.fm.
 
         :param user: A pylast user object
         :returns: A tuple with the top artists, albums, and tracks for the entire user history.
         """
-    return user.get_top_artists(period='overall', limit=100), user.get_top_albums(period='overall', limit=15), \
-        user.get_top_tracks(period='overall', limit=15)
+    return user.get_top_artists(period='overall', limit=100), user.get_top_albums(period='overall', limit=100), \
+        user.get_top_tracks(period='overall', limit=100)
 
 
 def write_data_to_file(data, file_name: str):
