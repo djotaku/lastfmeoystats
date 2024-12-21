@@ -1,2 +1,2 @@
-pylast~=4.0.0
+pylast~=5.2.0
 matplotlib
