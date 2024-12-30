@@ -54,7 +54,7 @@ def write_data_to_file(data, file_name: str):
     :param data: The data from last.fm - an iterable
     :param file_name: The filename to save the data to.
     """
-    output = [f'{number + 1}. {lastfm_thing.item} ({lastfm_thing.weight})\n' for number, lastfm_thing in
+    output = [f'{number + 1}. **{lastfm_thing.item} ({lastfm_thing.weight})** - \n' for number, lastfm_thing in
               enumerate(data)]
     with open(file_name, 'w') as file:
         file.writelines(output)
