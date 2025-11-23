@@ -1,0 +1,9 @@
+[project]
+name = "lastfmeoystats"
+version = "0.1.0"
+description = "Produce stats and graphs for last.fm from the whole year"
+requires-python = ">=3.14"
+dependencies = [
+    "matplotlib>=3.10.7",
+    "pylast>=7.0.0",
+]
